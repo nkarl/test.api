@@ -1,0 +1,17 @@
+{
+  "name": "my-xpress-api",
+  "version": "1.0.0",
+  "description": "nodejs rest api with expressjs, sequelize & postgresql.",
+  "main": "server.js",
+  "repository": "https://github.com/nkarl/test.api",
+  "author": "nkarl <21993921+nkarl@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0"
+  }
+}
