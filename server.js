@@ -6,11 +6,11 @@ const { Client } = require("pg");
 const PORT = 8080;
 const HOST = "localhost";
 
-const app = express();
+const api = express();
 const client = new Client({
   host: "localhost",
-  database: "my_db",
-  user: "myself",
+  database: "business_db",
+  user: "postgres",
   password: "pass",
   port: 5432,
 });
@@ -21,16 +21,19 @@ const selectAll = async (req, res) => {
     await client.query("BEGIN");
     let statement = "SELECT * FROM business WHERE (city='Ahwatukee');";
     const result = await client.query(statement);
+    console.log(result);
     res.send(result.rows);
-    await client.query("COMMIT");
+    await client.query("ROLLBACK");
+    //await client.query("COMMIT");
   } catch (err) {
     await client.query("ROLLBACK");
+    console.log(res, err);
   } finally {
-    client.release();
+    client.end(); // pool.release();
   }
-}
+};
 
-app.get("/", selectAll);
+api.get("/", selectAll);
 
-app.listen(PORT, HOST);
+api.listen(PORT, HOST);
 console.log(`Running on http://${PORT}:${PORT}`);
