@@ -12,9 +12,10 @@
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
+    "prettier": "2.8.4",
     "sequelize": "^6.28.0"
   },
   "scripts": {
-      "dev": "nodemon server.js"
+    "dev": "nodemon server.js"
   }
 }
