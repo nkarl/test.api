@@ -7,7 +7,7 @@ const PORT = 8080;
 const HOST = "localhost";
 
 const api = express();
-const client = new Client({
+const database = new Client({
     host: "localhost",
     database: "business_db",
     user: "postgres",
@@ -17,19 +17,19 @@ const client = new Client({
 
 const selectAll = async (req, res) => {
     try {
-        await client.connect();
-        await client.query("BEGIN");
+        await database.connect();
+        await database.query("BEGIN");
         let statement = "SELECT * FROM business WHERE (city='Ahwatukee');";
-        const result = await client.query(statement);
+        const result = await database.query(statement);
         console.log(result);
         res.send(result.rows);
-        await client.query("ROLLBACK");
-        //await client.query("COMMIT");
+        await database.query("ROLLBACK");
+        //await database.query("COMMIT");
     } catch (err) {
-        await client.query("ROLLBACK");
+        await database.query("ROLLBACK");
         console.log(res, err);
     } finally {
-        client.end(); // pool.release();
+        database.end(); // pool.release();
     }
 };
 
